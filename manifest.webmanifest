@@ -1,0 +1,11 @@
+{
+  "name": "MindSprint Brain Training",
+  "short_name": "MindSprint",
+  "description": "Offline-friendly mini-games and daily challenges.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1020",
+  "theme_color": "#101321",
+  "icons": [{"src":"assets/icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

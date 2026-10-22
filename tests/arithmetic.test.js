@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createArithmeticQuestion} from '../js/games/arithmetic.js';
+test('arithmetic questions have answer in options and valid division',()=>{for(const difficulty of ['easy','medium','hard'])for(let i=0;i<50;i++){const q=createArithmeticQuestion(difficulty);assert.ok(q.options.includes(q.answer));assert.equal(new Set(q.options).size,4);if(q.prompt.includes('÷')){const [a,b]=q.prompt.split(' ÷ ').map(Number);assert.equal(a%b,0);assert.equal(a/b,q.answer);}}});

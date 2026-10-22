@@ -1,0 +1,2 @@
+export function createCountdown(seconds, onTick, onComplete) { let remaining = Math.max(0, Math.floor(seconds)); let interval = null; let stopped = false; const tick = () => { if (stopped) return; onTick(remaining); if (remaining <= 0) { stopped = true; clearInterval(interval); onComplete(); } else remaining--; }; tick(); if (!stopped) interval = setInterval(tick, 1000); return () => { stopped = true; clearInterval(interval); }; }
+export function formatTime(seconds) { const s = Math.max(0, Math.floor(seconds)); return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }

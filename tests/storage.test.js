@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {defaultData,normalizeData,loadData,saveData,exportData,importData,STORAGE_KEY} from '../js/storage.js';
+function memoryStorage(){const m=new Map();return {getItem:k=>m.has(k)?m.get(k):null,setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)};}
+test('normalization repairs malformed data and rejects invalid settings',()=>{const d=normalizeData({settings:{difficulty:'impossible',theme:'bad'},sessions:'bad'});assert.equal(d.settings.difficulty,'medium');assert.equal(d.settings.theme,'dark');assert.deepEqual(d.sessions,[]);});
+test('storage round trip and export/import',()=>{const s=memoryStorage(),d=defaultData();d.sessions.push({game:'memory',score:10});assert.equal(saveData(d,s),true);assert.equal(s.getItem(STORAGE_KEY)!==null,true);assert.equal(loadData(s).sessions[0].score,10);assert.equal(importData(exportData(d)).sessions.length,1);});
+test('corrupt storage recovers to defaults and malformed import throws',()=>{const s=memoryStorage();s.setItem(STORAGE_KEY,'{');assert.equal(loadData(s).sessions.length,0);assert.throws(()=>importData('{"nope":true}'));});

@@ -1,0 +1,1 @@
+body[data-text-size="large"]{--font-scale:1.15}body[data-text-size="largest"]{--font-scale:1.3}body[data-contrast="high"] .button{border:2px solid currentColor}body.reduce-motion .game-card:hover{transform:none}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}}

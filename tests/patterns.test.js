@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createPatternQuestion} from '../js/games/patterns.js';
+test('pattern questions have a unique intended answer among options',()=>{for(const difficulty of ['easy','medium','hard'])for(let i=0;i<30;i++){const q=createPatternQuestion(difficulty);assert.equal(q.sequence.length,4);assert.ok(q.options.includes(q.answer));assert.equal(new Set(q.options).size,4);}});

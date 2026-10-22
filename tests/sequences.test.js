@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createSequenceQuestion} from '../js/games/sequences.js';import {seededRandom} from '../js/utils/random.js';
+test('sequence question has one answer included in options',()=>{for(const difficulty of ['easy','medium','hard']){const rng=seededRandom(1234);for(let i=0;i<30;i++){const q=createSequenceQuestion(difficulty,rng);assert.equal(q.sequence.length,5);assert.equal(q.sequence[4],null);assert.ok(q.options.includes(q.answer));assert.equal(new Set(q.options).size,4);}}});

@@ -1,0 +1,7 @@
+import { shuffle } from '../utils/random.js';
+export const MEMORY_PAIRS = { easy: 6, medium: 8, hard: 12 };
+const SYMBOLS = ['✦','☾','☀','◆','♥','♣','♫','✿','☯','⬟','⚑','☘'];
+export function createMemoryDeck(difficulty = 'medium', rng = Math.random) { const pairs = MEMORY_PAIRS[difficulty] ?? MEMORY_PAIRS.medium; return shuffle(SYMBOLS.slice(0,pairs).flatMap((symbol,index)=>[{id:`${index}-a`,pair:index,symbol},{id:`${index}-b`,pair:index,symbol}]),rng); }
+export function isMemoryComplete(cards) { return cards.length > 0 && cards.every(c => c.matched); }
+export function memorySelection(state, cardId) { if (state.locked || state.finished) return { ...state, cards: state.cards }; const card = state.cards.find(c=>c.id===cardId); if (!card || card.matched || state.openIds.includes(cardId)) return state; const openIds = [...state.openIds,cardId]; const selections = state.selections + 1; if (openIds.length < 2) return { ...state, openIds, selections }; const [a,b] = openIds.map(id=>state.cards.find(c=>c.id===id)); if (a.pair === b.pair) { const cards = state.cards.map(c=>c.id===a.id||c.id===b.id?{...c,matched:true}:c); return { ...state, cards, openIds:[], selections, matches:state.matches+1, finished:isMemoryComplete(cards) }; } return { ...state, openIds, selections, locked:true, pendingMismatch:true }; }
+export function resolveMemoryMismatch(state) { return { ...state, openIds:[], locked:false, pendingMismatch:false }; }

@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {memoryScore,questionScore,reactionTrialScore,reactionSummary,dailyCompletionBonus} from '../js/scoring.js';
+test('memory score decreases with selections and time and never goes negative',()=>{assert.equal(memoryScore(0,0),1000);assert.equal(memoryScore(10,20),860);assert.equal(memoryScore(999,999),0);});
+test('question scoring awards correct and first-attempt bonus only',()=>{assert.equal(questionScore([{correct:true,firstAttempt:true},{correct:true,firstAttempt:false},{correct:false,firstAttempt:true}]),220);});
+test('reaction scoring rejects false starts and invalid durations',()=>{assert.equal(reactionTrialScore(200),100);assert.equal(reactionTrialScore(300),90);assert.equal(reactionTrialScore(200,true),0);assert.equal(reactionTrialScore(-1),0);assert.equal(reactionTrialScore(NaN),0);});
+test('reaction summary uses median and ignores false starts',()=>{assert.deepEqual(reactionSummary([{ms:100,falseStart:false},{ms:300,falseStart:false},{ms:null,falseStart:true}]),{medianMs:200,averageMs:200,validTrials:2});});
+test('daily bonus requires all positive-count rounds',()=>{assert.equal(dailyCompletionBonus(3,3),100);assert.equal(dailyCompletionBonus(2,3),0);assert.equal(dailyCompletionBonus(0,0),0);});

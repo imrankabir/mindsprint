@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101321"><meta name="description" content="MindSprint: offline-friendly brain-training games and daily challenges.">
+  <title>MindSprint — Brain Training</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/layout.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/games.css"><link rel="stylesheet" href="css/accessibility.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar"><button class="brand" data-route="home" aria-label="MindSprint home"><span class="brand-mark">✦</span><span>MindSprint</span></button><div class="top-actions"><span id="connection-status" class="status-pill">Offline-ready</span><button class="icon-button" id="settings-shortcut" aria-label="Open settings" title="Settings">⚙</button></div></header>
+  <div class="app-shell"><aside class="sidebar" aria-label="Main navigation"><nav id="navigation"><button class="nav-link active" data-route="home"><span>⌂</span>Dashboard</button><button class="nav-link" data-route="games"><span>▦</span>All games</button><button class="nav-link" data-route="daily"><span>☼</span>Daily challenge</button><button class="nav-link" data-route="progress"><span>↗</span>Progress</button><button class="nav-link" data-route="settings"><span>⚙</span>Settings</button></nav><div class="sidebar-note"><span class="mini-spark">✦</span><strong>Small steps add up.</strong><p>Practice for a few minutes, whenever it suits you.</p></div><footer>MindSprint <span id="app-version">v1.0</span><br><span class="muted">Your scores stay on this device.</span></footer></aside>
+    <main id="main" tabindex="-1"><div id="view" aria-live="polite" aria-busy="false"><div class="loading-state">Loading MindSprint…</div></div></main>
+  </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
+  <dialog id="confirm-dialog" class="dialog"><form method="dialog"><h2 id="dialog-title">Please confirm</h2><p id="dialog-message"></p><div class="dialog-actions"><button class="button secondary" value="cancel">Cancel</button><button class="button danger" value="confirm">Continue</button></div></form></dialog>
+  <script type="module" src="js/app.js"></script>
+</body></html>
